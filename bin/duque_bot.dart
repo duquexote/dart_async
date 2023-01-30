@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'questions/good_manners.dart';
+import 'questions/jokenpo.dart';
 import 'questions/time_questions.dart';
 import 'timing/waiting_time.dart';
 
@@ -7,6 +9,15 @@ void main() async {
   String duqueBot = 'DuqueBOT:\n';
   var a = true;
   String usuario = '';
+
+  /* var myStream = BotClock().duqueBotStream(1, 10);
+  var subscriber = myStream.listen((event) {
+    print(
+        '                                     DuqueBot está ativo à $event segundos');
+  }, onDone: (() {
+    print('DuqueBot está finalizando o trabalho, faça a última pergunta!');
+    a = false;
+  })); */
 
   print('-- Iniciando o DuqueBOT, aguarde..--');
   await BotClock().clock(2);
@@ -26,6 +37,10 @@ void main() async {
       // verificar antes, assim não fazemos toda a função sem precisar.
       await BotClock().clock(2);
       TimeQuestions(usuario).timeQuestion();
+    } else if (GoodManners(usuario).isThisManners()) {
+      GoodManners(usuario).goodManners();
+    } else if (Jokenpo(usuario).isThisJokenpo()) {
+      Jokenpo(usuario).playJokenpo();
     } else if (false) {
       //Basta adicionar novas perguntas aqui!
     } else {
